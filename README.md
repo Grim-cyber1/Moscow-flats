@@ -1,12 +1,62 @@
+# Задача регресси по стоимости квартир в Москве
+
+
+
+
+
+# Импорт библиотек
 import pandas as pd
 import numpy as np
-
 from matplotlib import pyplot as plt
+
+# Запуск проекта
 !gdown https://drive.google.com/uc?id=1deu_mXHCOUJbZc_o5kaYJ8PDb4VXmTOe
-
 !unrar x 'HSE IB - Apartment Prices.rar'
-pd.get_dummies(df['Okrug']).columns
 
+df.head()
+
+df.info()
+
+df['Balcony'].value_counts()
+
+df[['балкон', 'лоджия']] = pd.get_dummies(df['Balcony'], dtype=int)
+
+df.head()
+
+df.drop(columns=['Balcony'], inplace=True)
+
+pd.get_dummies(df['Walls'], dtype=int).columns
+
+df[['блочный', 'кирпично-монолитный', 'кирпичный', 'монолитный', 'панельный дом']] = pd.get_dummies(df['Walls'], dtype=int)
+
+df.head()
+
+df.drop(columns=['Walls'], inplace=True)
+
+df['Age'].value_counts()
+
+pd.get_dummies(df['Age']).columns
+
+df[['вторичка', 'новостройка']] = pd.get_dummies(df['Age'], dtype=int)
+
+df.drop(columns=['Age'], inplace=True)
+
+df.head()
+
+df['Lift'].value_counts()
+
+pd.get_dummies(df['Lift']).columns
+
+df[['грузовой', 'пассажирский']] = pd.get_dummies(df['Lift'], dtype=int)
+
+df.drop(columns=['Lift'], inplace=True)
+
+df.head()
+
+df['Okrug'].value_counts()
+
+pd.get_dummies(df['Okrug']).columns
+pd.get_dummies(df['Okrug']).columns
 df[['ВАО', 'ЗАО', 'САО', 'СВАО', 'СЗАО', 'ЦАО', 'ЮАО', 'ЮВАО', 'ЮЗАО']] = pd.get_dummies(df['Okrug'], dtype=int)
 
 df.head()
